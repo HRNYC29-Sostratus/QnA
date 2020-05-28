@@ -8,9 +8,9 @@ services:
       POSTGRES_DB: QnA
     volumes:
       - ./QnA-Data:/var/lib/postgresql/data
-    ports: -"5432:5432"
+    ports: ["5432:5432"]
   web:
-    image: QnA-Docker-Image
-    depends_on: -db
+    image: qna-app
+    depends_on: [db]
     command: ["./wait-for-it.sh", "db:5432", "--", "node", "server.js"]
-    ports: -"3000:3000"
+    ports: ["3000:3000"]
