@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: QnA
+    volumes:
+      - ./QnA-Data:/var/lib/postgresql/data
+    ports: -"5432:5432"
+  web:
+    image: QnA-Docker-Image
+    depends_on: -db
+    command: ["./wait-for-it.sh", "db:5432", "--", "node", "server.js"]
+    ports: -"3000:3000"
