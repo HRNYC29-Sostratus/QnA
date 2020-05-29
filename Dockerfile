@@ -1,7 +1,4 @@
-FROM node:10
-WORKDIR /QnA
-COPY package.json /QnA
-RUN npm install
-COPY . /QnA
-CMD npm run
-EXPOSE 3000
+FROM postgres 
+
+ENV POSTGRES_PASSWORD postgres
+ENV POSTGRES_DB qna_db
