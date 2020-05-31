@@ -4,7 +4,7 @@
   "description": "QnA Service",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "author": "Austin DOuse",
   "license": "ISC",
@@ -18,6 +18,7 @@
     "docker-compose": "^0.23.4",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "pg": "^8.2.1"
   }
 }
