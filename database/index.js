@@ -16,11 +16,31 @@ const pool = new Pool({
 const promiseQuery = promisify(pool.query).bind(pool);
 const promisePoolEnd = promisify(pool.end).bind(pool);
 
-const getSome = () => {
-  const query = `SELECT * FROM qna_joined WHERE product_id = 1;`;
+const getQuestionsAndAnswers = (id) => {
+  const query = `SELECT * FROM qna_joined WHERE product_id = ${id};`;
+  return promiseQuery(query);
+};
+
+const getAnswersAndPhotos = (id) => {
+  const query = `SELECT * FROM answers_photos_joined WHERE question_id = ${id}`;
+  return promiseQuery(query);
+};
+
+const insertQuestion = (product_id, body, name, email) => {
+  let date = new Date();
+  const query = `INSERT INTO public.qna_joined (id, product_id, body, date_written, asker_name, asker_email, reported_q, helpful_q) values((SELECT MAX(id)+1 FROM public.qna_joined), ${product_id}, '${body}', '${date}', '${name}', '${email}', 0 , 0);`;
+  return promiseQuery(query);
+};
+
+const insertAnswer = (question_id, body, name, email) => {
+  let date = new Date();
+  const query = `INSERT INTO public.answers_typed (id_a, question_id, body_a, date_written_a, answerer_name, answerer_email, reported_a, helpful_a) values ((SELECT MAX(id_a) + 1 FROM public.answers_typed), ${question_id}, '${body}', '${date}', '${name}', '${email}', 0, 0)`;
   return promiseQuery(query);
 };
 
 module.exports = {
-  getSome,
+  getQuestionsAndAnswers,
+  getAnswersAndPhotos,
+  insertQuestion,
+  insertAnswer,
 };
