@@ -86,5 +86,52 @@ if (cluster.isMaster) {
     console.log("request body", req.body);
   });
 
+  app.put("/qa/question/:question_id/helpful", (req, res) => {
+    let question_id = req.params.question_id;
+
+    db.updateQuestionHelpful(question_id)
+      .then((results) => {
+        res.json(results);
+      })
+      .catch((err) => {
+        res.sendStatus(404);
+      });
+  });
+
+  app.put("/qa/question/:question_id/report", (req, res) => {
+    let question_id = req.params.question_id;
+    db.updateQuestionReport(question_id)
+      .then((results) => {
+        res.json(results);
+      })
+      .catch((err) => {
+        res.sendStatus(404);
+      });
+  });
+
+  app.put("/qa/answer/:answer_id/helpful", (req, res) => {
+    let answer_id = req.params.answer_id;
+
+    db.updateAnswerHelpful(answer_id)
+      .then((results) => {
+        res.json(results);
+      })
+      .catch((err) => {
+        res.sendStatus(404);
+      });
+  });
+
+  app.put("/qa/answer/:answer_id/report", (req, res) => {
+    let answer_id = req.params.answer_id;
+
+    db.updateAnswerReport(answer_id)
+      .then((results) => {
+        res.json(results);
+      })
+      .catch((err) => {
+        res.sendStatus(404);
+      });
+  });
+
   app.listen(PORT, () => console.log(`Server listening on ${PORT}!`));
 }
