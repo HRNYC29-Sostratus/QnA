@@ -1,4 +1,7 @@
 const questionsAndAnswersReponse = (results) => {
+  if (results.rows.length === 0) {
+    return {};
+  }
   let obj = {
     product_id: results.rows[0].product_id,
     results: [],

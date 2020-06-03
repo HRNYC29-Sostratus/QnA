@@ -1,14 +1,13 @@
 const cluster = require("cluster");
 
 if (cluster.isMaster) {
-  const cpus = 4;
+  const cpus = 6;
   console.log(`forking ${cpus} cpus!`);
   for (let i = 0; i < cpus; i++) {
     cluster.fork();
   }
 } else {
   const express = require("express");
-  const app = express();
   const bodyParser = require("body-parser");
   const path = require("path");
   const compression = require("compression");
@@ -17,7 +16,8 @@ if (cluster.isMaster) {
   const morgan = require("morgan");
 
   const PORT = 8080;
-
+  const app = express();
+  app.disable("etag").disable("x-powered-by");
   app.use(compression());
   app.use(bodyParser.json());
   app.use(morgan("dev"));
