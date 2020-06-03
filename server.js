@@ -81,9 +81,6 @@ if (cluster.isMaster) {
       .catch((err) => {
         res.sendStatus(404);
       });
-
-    console.log("request params", req.params);
-    console.log("request body", req.body);
   });
 
   app.put("/qa/question/:question_id/helpful", (req, res) => {
