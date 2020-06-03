@@ -18,6 +18,7 @@
     "docker": "^1.0.0",
     "docker-compose": "^0.23.4",
     "express": "^4.17.1",
+    "faker": "^4.1.0",
     "fs": "0.0.1-security",
     "jest": "^26.0.1",
     "morgan": "^1.10.0",

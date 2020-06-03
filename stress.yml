@@ -1,0 +1,12 @@
+config:
+  target: "http://localhost:8080"
+  phases:
+    - duration: 3
+      arrivalRate: 100
+  processor: "./stress-data.js"
+scenarios:
+  - name: "QnA By Id"
+    flow:
+      - function: "generateId"
+      - get:
+          url: "/qa/{{id}}"
