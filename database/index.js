@@ -49,12 +49,12 @@ const updateQuestionReport = (question_id) => {
 };
 
 const updateAnswerHelpful = (answer_id) => {
-  const query = `UPDATE answers_typed SET helpful_a = (SELECT helpful_a + 1 FROM answers_typed WHERE id =${answer_id}) WHERE id =${answer_id};`;
+  const query = `UPDATE answers_typed SET helpful_a = (SELECT helpful_a + 1 FROM answers_typed WHERE id_a =${answer_id}) WHERE id_a =${answer_id};`;
   return promiseQuery(query);
 };
 
 const updateAnswerReport = (answer_id) => {
-  const query = `UPDATE answers_typed SET reported_a = (SELECT reported_a + 1 FROM answers_typed WHERE id =${answer_id}) WHERE id =${answer_id};`;
+  const query = `UPDATE answers_typed SET reported_a = (SELECT reported_a + 1 FROM answers_typed WHERE id_a =${answer_id}) WHERE id_a =${answer_id};`;
   return promiseQuery(query);
 };
 
