@@ -4,7 +4,8 @@
   "description": "QnA Service",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "test": "jest --forceExit"
   },
   "author": "Austin DOuse",
   "license": "ISC",
@@ -18,8 +19,10 @@
     "docker-compose": "^0.23.4",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
+    "jest": "^26.0.1",
     "morgan": "^1.10.0",
     "path": "^0.12.7",
-    "pg": "^8.2.1"
+    "pg": "^8.2.1",
+    "supertest": "^4.0.2"
   }
 }

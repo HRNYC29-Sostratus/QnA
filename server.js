@@ -131,4 +131,5 @@ if (cluster.isMaster) {
   });
 
   app.listen(PORT, () => console.log(`Server listening on ${PORT}!`));
+  module.exports = app;
 }
