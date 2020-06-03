@@ -42,10 +42,29 @@ const updateQuestionHelpful = (question_id) => {
   const query = `UPDATE questions_typed SET helpful_q = (SELECT helpful_q + 1 FROM questions_typed WHERE id =${question_id}) WHERE id =${question_id};`;
   return promiseQuery(query);
 };
+
+const updateQuestionReport = (question_id) => {
+  const query = `UPDATE questions_typed SET reported_q = (SELECT reported_q + 1 FROM questions_typed WHERE id =${question_id}) WHERE id =${question_id};`;
+  return promiseQuery(query);
+};
+
+const updateAnswerHelpful = (answer_id) => {
+  const query = `UPDATE answers_typed SET helpful_a = (SELECT helpful_a + 1 FROM answers_typed WHERE id =${answer_id}) WHERE id =${answer_id};`;
+  return promiseQuery(query);
+};
+
+const updateAnswerReport = (answer_id) => {
+  const query = `UPDATE answers_typed SET reported_a = (SELECT reported_a + 1 FROM answers_typed WHERE id =${answer_id}) WHERE id =${answer_id};`;
+  return promiseQuery(query);
+};
+
 module.exports = {
   getQuestionsAndAnswers,
   getAnswersAndPhotos,
   insertQuestion,
   insertAnswer,
   updateQuestionHelpful,
+  updateQuestionReport,
+  updateAnswerHelpful,
+  updateAnswerReport,
 };
