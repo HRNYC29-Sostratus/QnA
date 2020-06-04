@@ -1,8 +1,8 @@
 config:
   target: "http://localhost:8080"
   phases:
-    - duration: 10
-      arrivalRate: 1000
+    - duration: 3
+      arrivalRate: 300
   processor: "./stress-data.js"
 scenarios:
   - name: "QnA By Id"
