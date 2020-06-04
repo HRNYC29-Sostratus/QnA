@@ -17,7 +17,10 @@ const promiseQuery = promisify(pool.query).bind(pool);
 const promisePoolEnd = promisify(pool.end).bind(pool);
 
 const getQuestionsAndAnswers = (id) => {
-  const query = `SELECT * FROM qna_joined WHERE product_id = ${id};`;
+  const query = `SELECT b.id, b.product_id, b.body, b.date_written, b.asker_name, b.asker_email, b.reported_q, b.helpful_q, a.ID_A, a.QUESTION_ID, a.BODY_a, a.answerer_name, a.answerer_email, a.reported_a, a.helpful_a
+  FROM answers_typed a
+  LEFT JOIN questions_typed b ON a.question_id = b.id
+  WHERE b.product_id = ${id};`;
   return promiseQuery(query);
 };
 
