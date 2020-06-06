@@ -9,12 +9,12 @@ if (cluster.isMaster) {
 } else {
   let newrelic = require("newrelic");
   const express = require("express");
-  const bodyParser = require("body-parser");
   const path = require("path");
   const compression = require("compression");
   const db = require("./database/index");
   const helpers = require("./buildResponse");
   const morgan = require("morgan");
+  const bodyParser = require("body-parser");
 
   const PORT = 8080;
   const app = express();
@@ -25,6 +25,10 @@ if (cluster.isMaster) {
   app.use(bodyParser.urlencoded({extended: true}));
 
   app.use(express.static(path.join(__dirname, "../dist/")));
+
+  app.get("/loaderio-9777923edd00b4b3942195275f2e013e", (req, res) => {
+    res.send("loaderio-9777923edd00b4b3942195275f2e013e");
+  });
 
   app.get("/qa/:product_id", (req, res) => {
     let id = req.params.product_id;
