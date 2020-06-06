@@ -26,6 +26,10 @@ if (cluster.isMaster) {
 
   app.use(express.static(path.join(__dirname, "../dist/")));
 
+  app.get("/loaderio-9777923edd00b4b3942195275f2e013e", (req, res) => {
+    res.send("loaderio-9777923edd00b4b3942195275f2e013e");
+  });
+
   app.get("/qa/:product_id", (req, res) => {
     let id = req.params.product_id;
     db.getQuestionsAndAnswers(id)
