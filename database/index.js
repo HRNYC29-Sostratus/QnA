@@ -3,8 +3,8 @@ const {promisify} = require("util");
 const {Pool} = require("pg");
 
 const pool = new Pool({
-  host: "localhost",
-  port: 5432,
+  host: "13.59.110.213",
+  port: 80,
   user: "postgres",
   password: 123456789,
   database: "postgres",
