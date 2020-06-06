@@ -8,20 +8,28 @@ const pool = new Pool({
   user: "postgres",
   password: 123456789,
   database: "postgres",
-  max: 20,
+  max: 10,
   connectionTimeoutMillis: 2000,
-  idleTimeoutMillis: 30000,
+  idleTimeoutMillis: 15000,
 });
 
 const promiseQuery = promisify(pool.query).bind(pool);
 const promisePoolEnd = promisify(pool.end).bind(pool);
 
-const getQuestionsAndAnswers = (id) => {
+const getQuestionsAndAnswers = async (id) => {
+  const client = await pool.connect();
   const query = `SELECT b.id, b.product_id, b.body, b.date_written, b.asker_name, b.asker_email, b.reported_q, b.helpful_q, a.ID_A, a.QUESTION_ID, a.BODY_a, a.answerer_name, a.answerer_email, a.reported_a, a.helpful_a
   FROM answers_typed a
   LEFT JOIN questions_typed b ON a.question_id = b.id
   WHERE b.product_id = ${id};`;
-  return promiseQuery(query);
+  try {
+    return await client.query(query);
+  } catch (err) {
+    console.log(err);
+    client.release();
+  } finally {
+    client.release();
+  }
 };
 
 const getAnswersAndPhotos = (id) => {
