@@ -9,12 +9,12 @@ if (cluster.isMaster) {
 } else {
   let newrelic = require("newrelic");
   const express = require("express");
-  const bodyParser = require("body-parser");
   const path = require("path");
   const compression = require("compression");
   const db = require("./database/index");
   const helpers = require("./buildResponse");
   const morgan = require("morgan");
+  const bodyParser = require("body-parser");
 
   const PORT = 8080;
   const app = express();
