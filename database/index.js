@@ -9,8 +9,8 @@ const pool = new Pool({
   password: 123456789,
   database: "postgres",
   max: 20,
-  connectionTimeoutMillis: 0,
-  idleTimeoutMillis: 0,
+  connectionTimeoutMillis: 2000,
+  idleTimeoutMillis: 30000,
 });
 
 const promiseQuery = promisify(pool.query).bind(pool);
@@ -70,4 +70,5 @@ module.exports = {
   updateQuestionReport,
   updateAnswerHelpful,
   updateAnswerReport,
+  promisePoolEnd,
 };
