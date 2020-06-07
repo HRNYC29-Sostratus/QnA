@@ -26,13 +26,9 @@ if (cluster.isMaster) {
 
   app.use(express.static(path.join(__dirname, "../dist/")));
 
-  app.get(
-    "/loaderio-fc5e276d4eea604a5b2a0a0c3c9be27f",
-
-    (req, res) => {
-      res.send("loaderio-fc5e276d4eea604a5b2a0a0c3c9be27f");
-    }
-  );
+  app.get("/loaderio-fc5e276d4eea604a5b2a0a0c3c9be27f", (req, res) => {
+    res.send("loaderio-fc5e276d4eea604a5b2a0a0c3c9be27f");
+  });
 
   app.get("/qa/:product_id", (req, res) => {
     let id = req.params.product_id;
