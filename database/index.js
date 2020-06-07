@@ -32,9 +32,20 @@ const getQuestionsAndAnswers = async (id) => {
   }
 };
 
-const getAnswersAndPhotos = (id) => {
-  const query = `SELECT * FROM answers_photos_joined WHERE question_id = ${id}`;
-  return promiseQuery(query);
+const getAnswersAndPhotos = async (id) => {
+  const client = await pool.connect();
+  const query = `SELECT b.id, b.product_id, b.body, b.date_written, b.asker_name, b.asker_email, b.reported_q, b.helpful_q, a.ID_A, a.QUESTION_ID, a.BODY_a, a.answerer_name, a.answerer_email, a.reported_a, a.helpful_a
+  FROM answers_typed a
+  LEFT JOIN questions_typed b ON a.question_id = b.id
+  WHERE a.question_id = ${id};`;
+  try {
+    return await client.query(query);
+  } catch (err) {
+    console.log(err);
+    client.release();
+  } finally {
+    client.release();
+  }
 };
 
 const insertQuestion = (product_id, body, name, email) => {
