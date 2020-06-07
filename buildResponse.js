@@ -44,6 +44,9 @@ const questionsAndAnswersReponse = (results) => {
 };
 
 const answersAndPhotosResponse = (results) => {
+  if (results.rows.length === 0) {
+    return {};
+  }
   let obj = {question: results.rows[0].question_id, results: []};
 
   results.rows.forEach((row) => {
