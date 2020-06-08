@@ -34,11 +34,12 @@ if (cluster.isMaster) {
     let id = req.params.product_id;
     db.getQuestionsAndAnswers(id)
       .then((results) => {
-        return helpers.questionsAndAnswersReponse(results);
-      })
-      .then((results) => {
+        // return helpers.questionsAndAnswersReponse(results);
         res.json(results);
       })
+      // .then((results) => {
+      //   res.json(results);
+      // })
       .catch((err) => {
         res.sendStatus(404);
       });
