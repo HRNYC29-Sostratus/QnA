@@ -21,17 +21,12 @@ class CSVCleaner extends Transform {
 
   _transform(chunk, encoding, next) {
     for (let key in chunk) {
-      //trims whitespace
       let trimKey = key.trim();
       chunk[trimKey] = chunk[key];
       if (key !== trimKey) {
         delete chunk[key];
       }
     }
-    //filters out all non-number characters
-    // let onlyNumbers = chunk.default_price.replace(/\D/g, "");
-    // chunk.default_price = onlyNumbers;
-    //uses our csvStringifier to turn our chunk into a csv string
     chunk = csvStringifier.stringifyRecords([chunk]);
     this.push(chunk);
     next();
@@ -40,7 +35,6 @@ class CSVCleaner extends Transform {
 
 const transformer = new CSVCleaner({writableObjectMode: true});
 
-//write header
 writeStream.write(csvStringifier.getHeaderString());
 
 readStream
